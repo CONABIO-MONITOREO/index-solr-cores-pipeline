@@ -11,7 +11,20 @@ Se espera que el archivo del modelo esté en un directorio `model` dentro de est
 ## Pasos
 
 1. `megad.py`: Corre el modelo megadetector sobre el directorio de las imagenes a indexar. Se ejecuta dentro del contenedor con el comando `python megad.py`.
+2. `sipecam_anotaciones_cor.py`: Indexa en la instancia de Solr las inferencias obtenidas de megadetector en el core de anotaciones y las imagenes en la aplicación de sipecam.
 
+## Variables de ambiente
+
+El script `sipecam_anotaciones_cor.py` lee de un archivo que se llama `.env` las siguientes variables de ambiente
+
+  - POSTGRES_DB
+  - POSTGRES_USER
+  - POSTGRES_PASSWORD
+  - POSTGRES_HOST
+  - POSTGRES_PORT
+  - MGDT_OUTPUT
+  - THRESHOLD_SCORE=10
+  - SOLR_URL
 
 ## Dockerfile
 
