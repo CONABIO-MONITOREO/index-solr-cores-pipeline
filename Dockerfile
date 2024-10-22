@@ -5,6 +5,7 @@ WORKDIR /app
 COPY ./megad.py .
 COPY ./requirements.txt .
 COPY ./sipecam_anotationes_cor.py .
+COPY ./.env .
 
 RUN pip install -r requirements.txt
 
