@@ -45,7 +45,7 @@ sql = f'select file_id, longitude, latitude, node_name, filepath, cumulus_name, 
 from delivery.kobo_zendro_assoc as a \
 left join delivery.file as b on a.file_id=b.id \
 where b.extension_id in (3,6,10,11,12,24,25,26,27,32) and a.cumulus_name is not null and longitude is not null \
-order by b.creation_date limit 10'
+order by file_id limit 10'
 
 cur = conn.cursor()
 cur.execute(sql)
