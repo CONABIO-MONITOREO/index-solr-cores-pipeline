@@ -67,6 +67,10 @@ for row in rows:
     node_name_l = row[3].split('_')
     relative_path = row[4].replace('/LUSTRE/sacmod/audio/raw_media/entregas_sipecam/', '')
     
+    if not relative_path in mgdt_results.keys():
+        print(relative_path, 'not in detections')
+        continue
+
     if not 'address' in res_osm.keys():
         print(url_osm.format(lat=row[2], lon=row[1]))
         print('\n')
