@@ -45,7 +45,7 @@ sql = f'select file_id, longitude, latitude, node_name, filepath, cumulus_name, 
 from delivery.kobo_zendro_assoc as a \
 left join delivery.file as b on a.file_id=b.id \
 where b.extension_id in (3,6,10,11,12,24,25,26,27,32) and a.cumulus_name is not null and longitude is not null \
-order by random() limit 1000'
+order by b.creation_date limit 10'
 
 cur = conn.cursor()
 cur.execute(sql)
@@ -53,10 +53,15 @@ rows = cur.fetchall()
 cur.close()
 conn.close()
 
+print(len(rows))
+
 solr_sipecam = pysolr.Solr(f'{solr_url}/sipecam', always_commit=True)
 solr_anotaciones = pysolr.Solr(f'{solr_url}/anotaciones', always_commit=True)
 
+i = 1
 for row in rows:
+    print(i)
+    i+=1
     url = url_osm.format(lat=row[2], lon=row[1])
     res_osm = requests.get(url, headers={'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36'}).json()
     node_name_l = row[3].split('_')
